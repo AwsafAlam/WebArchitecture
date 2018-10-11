@@ -38,4 +38,17 @@ css styles are organised in a modular layout:
 
 Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more efficient.
 
+To Define a Project from scratch, we must first install Node js
+
+- `npm init` Initializes `package.json`
+- `npm init -y` also initializes package.json, but sets all the values to default for a quick setup
+- Next, install webpack and webpack-cli `npm -i --save-dev webpack webpack-cli` this specifies that webpack will only be used for the development build
+- By default, webpack will start from the `./src/index.js`, so that need to be created.
+- Now, modify `package.json` , and add the scripts
+- `"build": "webpack --mode production"` for `npm run build`. This minifies the js code into `./dist/main.js` file
+- `"dev": "webpack --mode development"` for `npm run dev`. This does not minify the js code into `./dist/main.js` file
+- Now, we have a basic build system that can be used to transpile advanced js code into simplified code compatible in browsers.
+
+### Adding other build systems to webpack
+
 ---
