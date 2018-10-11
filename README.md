@@ -24,4 +24,18 @@ css styles are organised in a modular layout:
 - modules (More discrete components of the page, standalone e.g widgets pop ups etc)
 - layouts (Major and minor styles based of use, e.g headers footers etc)
 
+---
+
+### Bourbon and Neat
+
+---
+
 ### Babel
+
+---
+
+## Webpack
+
+Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more efficient.
+
+---
