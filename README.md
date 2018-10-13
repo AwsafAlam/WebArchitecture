@@ -36,7 +36,7 @@ css styles are organised in a modular layout:
 
 ## Webpack
 
-Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more efficient.
+Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more efficient. **Gulp and Grunt are task runners, but Webpack is more advanced. It intelligently bundles.**. Webpack takes the input file and follows the source to build a dependency graph.
 
 To Define a Project from scratch, we must first install Node js
 
@@ -49,6 +49,56 @@ To Define a Project from scratch, we must first install Node js
 - `"dev": "webpack --mode development"` for `npm run dev`. This does not minify the js code into `./dist/main.js` file
 - Now, we have a basic build system that can be used to transpile advanced js code into simplified code compatible in browsers.
 
-### Adding other build systems to webpack
+Webpack 4 does not need any config. It will look in `./src/index.js` as the default entry point. Moreover, it will spit out the bundle in `./dist/main.js`. 
+
+Production mode enables all sorts of optimizations out of the box. Including minification, scope hoisting, tree-shaking and more.
+
+Development mode on the other hand is optimized for speed and does nothing more than providing an un-minified bundle.
+
+Further Reference  [Webpack 4](https://www.valentinog.com/blog/webpack-tutorial/)
+[Medium Blog](https://medium.com/beginners-guide-to-mobile-web-development/introduction-to-webpack-4-e528a6b3fc16)
+
+### Overriding default entry point
+
+```json
+"scripts": {
+  "dev": "webpack --mode development ./foo/src/js/index.js --output ./foo/main.js",
+  "build": "webpack --mode production ./foo/src/js/index.js --output ./foo/main.js"
+}
+```
+
+---
+
+## Using configuration file
+
+Having 2 configuration files is a common pattern in webpack.
+
+A typical project may have:
+
+- a configuration file for development, for defining webpack dev server and other stuff
+- a configuration file for production, for defining UglifyJSPlugin, sourcemaps and so on
+
+We can use the configuration file `webpack.config.js` to specify all the build dependencies.
+
+```js
+var webpack = require('webpack');
+
+module.exports = {
+    //webpack config goes here
+    entry: './src/index.js',
+
+    output: {
+        filename: 'main.js',
+        path: './dist'
+    }
+}
+```
+
+We will now use a config file to setup babel-loader to transpile our ES6+ code and html-webpack-plugin to simplify serving our webpack output bundle as a script tag on our HTML file. So, we fetch new dependencies.
+
+- `npm i @babel/core babel-loader @babel/preset-env --save-dev`
+- `npm i -D html-webpack-plugin`
+  
+
 
 ---
