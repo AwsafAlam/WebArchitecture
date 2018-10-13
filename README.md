@@ -30,10 +30,6 @@ css styles are organised in a modular layout:
 
 ---
 
-### Babel
-
----
-
 ## Webpack
 
 Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more efficient. **Gulp and Grunt are task runners, but Webpack is more advanced. It intelligently bundles.**. Webpack takes the input file and follows the source to build a dependency graph.
@@ -49,7 +45,7 @@ To Define a Project from scratch, we must first install Node js
 - `"dev": "webpack --mode development"` for `npm run dev`. This does not minify the js code into `./dist/main.js` file
 - Now, we have a basic build system that can be used to transpile advanced js code into simplified code compatible in browsers.
 
-Webpack 4 does not need any config. It will look in `./src/index.js` as the default entry point. Moreover, it will spit out the bundle in `./dist/main.js`. 
+Webpack 4 does not need any config. It will look in `./src/index.js` as the default entry point. Moreover, it will spit out the bundle in `./dist/main.js`.
 
 Production mode enables all sorts of optimizations out of the box. Including minification, scope hoisting, tree-shaking and more.
 
@@ -96,9 +92,36 @@ module.exports = {
 
 We will now use a config file to setup babel-loader to transpile our ES6+ code and html-webpack-plugin to simplify serving our webpack output bundle as a script tag on our HTML file. So, we fetch new dependencies.
 
+### Babel & HTML webpack plugin
+
 - `npm i @babel/core babel-loader @babel/preset-env --save-dev`
-- `npm i -D html-webpack-plugin`
+- `npm i html-webpack-plugin html-loader --save-dev`
   
+Now, for HTML plugin update the config file. Delete the script tags in the HTML file, as they will be injected by webpack.
+
+```js
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+module.exports = {
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    })
+  ]
+};
+
+```
+
+---
+
+## Extracting CSS to a file
+
+We must install some loader. Loaders are different from plugins. Plugins modify your bundling process, whereas a loader tells webpack how to load a file of a specific type.
+
+- `npm i mini-css-extract-plugin style-loader css-loader --save-dev`
+
+For using loaders, we need to use rules in the config.js file. Webpack bundles all of our CSS code into the index.js fileSo, we need to add an import for that at the start of `index.js` specify `import style from "./main.css";`
+
 
 
 ---
