@@ -1,11 +1,22 @@
 body {
-    background: plum;
-    background-image: url(./img/logo-icon.png)
+    background: rgb(105, 79, 175);
+    /* background-image: url(./img/logo-icon.png) */
 }
 
 #app{
     padding: 20pt;
     margin: 20pt;
-    color: antiquewhite;
-    background: rgb(51, 61, 153);
+    color: rebeccapurple;
+    /* background: rgb(51, 61, 153); */
+}
+
+.title{
+    position: relative;
+    float: right;
+
+}
+
+img{
+    width: 20%;
+    height: 20%;
 }

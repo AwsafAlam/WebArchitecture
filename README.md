@@ -126,7 +126,7 @@ Webpack doesn’t know how to make the transformation but has loaders: think of 
 
 babel-loader is the webpack loader for transpiling ES6 and above, down to ES5.
 
-To start using the loader we need to install a bunch of dependencies. 
+To start using the loader we need to install a bunch of dependencies.
 
 - Install `npm i @babel/core babel-loader @babel/preset-env --save-dev`
 
@@ -268,3 +268,33 @@ This also specifies the line numbersin the code
 We use Uglify plugin to minify the code. Webpack 4 automatically does this if we run `npm run build`
 
 ---
+
+## React
+
+---
+
+That’s easy once you’ve installed and configured babel. We must always use babel with react since it uses ES6 syntax and also JSX.
+
+Install React with:
+
+- `npm i react react-dom --save-dev`
+  
+Next up add babel-preset-react:
+
+- `npm i @babel/preset-react --save-dev`
+  
+Configure the preset in .babelrc:
+
+```json
+{
+  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
+Now, create a folder named components, and add react code to index.js. Add other codes to App.js inside components. Things should compile successfully!
+
+---
+
+### React Markdown
+
+Converts Markdown into React
