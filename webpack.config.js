@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
     //webpack config goes here
@@ -55,10 +56,11 @@ module.exports = {
           template: "./src/index.html",
           filename: "./index.html"
         }),
+        new CleanWebpackPlugin(['dist'])
         // new webpack.optimize.UglifyJsPlugin()
         // new MiniCssExtractPlugin({
-        //     filename: "main.css",
-        //     chunkFilename: "main.css"
+        //     filename: "[name].css",
+        //     chunkFilename: "[id].css"
         // })
       ]
 

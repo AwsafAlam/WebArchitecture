@@ -5,4 +5,4 @@ import ReactDOM from "react-dom";
 import HelloMessage from './components/App'
 
 
-ReactDOM.render(<HelloMessage name="Taylor" />, document.getElementById("app"));
+ReactDOM.render(<HelloMessage name="Awsaf" />, document.getElementById("app"));

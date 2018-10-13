@@ -295,6 +295,24 @@ This will convert any sass/scss to css and inject to the DOM immediately.
 
 ---
 
+To build ta file completely from scratch everytime, we use clean webpack plugin. So, we remove the dist folder completely before building a file.
+
+- Install using `npm install --save-dev clean-webpack-plugin`
+
+Modify the config file
+
+```json
+plugins: [
+  new HtmlWebPackPlugin({
+    template: "./src/index.html",
+    filename: "./index.html"
+  }),
+  new CleanWebpackPlugin(['dist'])  //Array of folders to be removed
+}
+```
+
+---
+
 ## React
 
 ---
