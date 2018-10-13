@@ -12,6 +12,7 @@ module.exports = {
     //     path: './dist'
     // },
 
+    devtool: 'eval',
     module: {
         rules: [
         //   {
@@ -32,7 +33,7 @@ module.exports = {
         },
         {
             test: /\.css$/,
-            use: ["style-loader", "css-loader" ]
+            use: ["style-loader", "css-loader?sourceMap" ] //sourceMap enables devtool
         },
         {
             test: /\.(jpg|png|gif)$/,
@@ -45,7 +46,8 @@ module.exports = {
         new HtmlWebPackPlugin({
           template: "./src/index.html",
           filename: "./index.html"
-        })
+        }),
+        // new webpack.optimize.UglifyJsPlugin()
         // new MiniCssExtractPlugin({
         //     filename: "main.css",
         //     chunkFilename: "main.css"

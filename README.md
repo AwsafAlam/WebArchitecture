@@ -188,6 +188,20 @@ devServer: {
 }
 ```
 
-Run by typing `npm run start` in the console.
+Run by typing `npm run start` in the console. This does not physically build the file. Need to run `npm run build` to get the final production build.
+
+---
+
+## Adding Source Maps
+
+To help debugging the project, we need to enable dev tool, to know exactly where a bug is located. Could slow down build time. [Further Documentation](https://webpack.js.org/configuration/devtool/)
+
+This also specifies the line numbersin the code
+
+---
+
+### Minifying code
+
+We use Uglify plugin to minify the code. Webpack 4 automatically does this if we run `npm run build`
 
 ---
