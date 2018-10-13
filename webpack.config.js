@@ -15,13 +15,13 @@ module.exports = {
     devtool: 'eval',
     module: {
         rules: [
-        //   {
-        //     test: /\.js$/,
-        //     exclude: /node_modules/,
-        //     use: {
-        //       loader: "babel-loader"
-        //     }
-        //   },
+        { // For using ES6 code
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+              loader: "babel-loader"
+            }
+        },
         { // For loading images from the HTML
         test: /\.html$/,
         use: [

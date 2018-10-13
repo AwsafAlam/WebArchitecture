@@ -32,7 +32,7 @@ css styles are organised in a modular layout:
 
 ## Webpack
 
-Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more efficient. **Gulp and Grunt are task runners, but Webpack is more advanced. It intelligently bundles.**. Webpack takes the input file and follows the source to build a dependency graph.
+Webpack is a module bundler for JavaScript applications. Bundles all the code together, so that we can write our code in ES6/ latest javascript. It also compiles and minifies css to make the site more ***efficient***. **Gulp and Grunt are task runners, but Webpack is more advanced. It intelligently bundles.**. Webpack takes the input file and follows the source to build a dependency graph.
 
 To Define a Project from scratch, we must first install Node js
 
@@ -92,10 +92,11 @@ module.exports = {
 
 We will now use a config file to setup babel-loader to transpile our ES6+ code and html-webpack-plugin to simplify serving our webpack output bundle as a script tag on our HTML file. So, we fetch new dependencies.
 
-### Babel & HTML webpack plugin
+---
 
-- `npm i @babel/core babel-loader @babel/preset-env --save-dev`
-- `npm i html-webpack-plugin html-loader --save-dev`
+### HTML webpack plugin
+
+- Install `npm i html-webpack-plugin html-loader --save-dev`
   
 Now, for HTML plugin update the config file. Delete the script tags in the HTML file, as they will be injected by webpack.
 
@@ -110,6 +111,68 @@ module.exports = {
   ]
 };
 
+```
+
+---
+
+### Bable
+
+Modern Javascript is mostly written in ES6.
+But not every browser know how to deal with ES6. We need some kind of transformation.
+
+This transformation step is called transpiling. Transpiling is the act of taking ES6 and making it understandable by older browsers.
+
+Webpack doesn’t know how to make the transformation but has loaders: think of them as of transformers.
+
+babel-loader is the webpack loader for transpiling ES6 and above, down to ES5.
+
+To start using the loader we need to install a bunch of dependencies. 
+
+- Install `npm i @babel/core babel-loader @babel/preset-env --save-dev`
+
+Next up configure Babel by creating a new file named .babelrc inside the project folder:
+
+```json
+{
+    "presets": [
+        "@babel/preset-env"
+    ]
+}
+```
+
+At this point we have 2 options for configuring babel-loader:
+
+- using a configuration file for webpack
+- using `--module-bind` in your npm scripts
+
+For using loaders in webpack 4 you still have to create a configuration file.
+
+```json
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
+  }
+};
+```
+
+Without this config, ES6 code will not be exacuted by the browser.
+Here is no need to specify the entry point unless you want to customize it.
+
+The second option is using it in command line
+
+```json
+"scripts": {
+    "dev": "webpack --mode development --module-bind js=babel-loader",
+    "build": "webpack --mode production --module-bind js=babel-loader"
+  }
 ```
 
 ---
