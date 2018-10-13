@@ -185,7 +185,7 @@ We must install some loader. Loaders are different from plugins. Plugins modify 
 
 For using loaders, we need to use rules in the config.js file. Webpack bundles all of our CSS code into the index.js fileSo, we need to add an import for that at the start of `index.js` specify `import style from "./main.css";`
 
-By default webpack uses hash to extraxt file, but we can specify the names if we want. mini-css-extract-plugin will extract the css from the index,js and put thenm in a seperate folder.
+By default webpack uses hash to extraxt file, but we can specify the names if we want. mini-css-extract-plugin will extract the css from the index,js and put thenm in a seperate folder. [See docs for further info](https://webpack.js.org/plugins/mini-css-extract-plugin/)
 
 ---
 
