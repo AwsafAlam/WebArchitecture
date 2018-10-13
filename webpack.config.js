@@ -38,6 +38,14 @@ module.exports = {
         {
             test: /\.(jpg|png|gif|svg)$/,
             use: ["url-loader" ]
+        },
+        {
+            test: /\.(scss|sass)$/,
+            use: [
+                "style-loader", // creates style nodes from JS strings
+                "css-loader?sourceMap", // translates CSS into CommonJS
+                "sass-loader" // compiles Sass to CSS, using Node Sass by default
+            ]
         }
 
         ]

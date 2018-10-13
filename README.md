@@ -269,6 +269,32 @@ We use Uglify plugin to minify the code. Webpack 4 automatically does this if we
 
 ---
 
+## Using Sass
+
+First we install the sass loader `npm install sass-loader node-sass css-loader --save-dev`
+We can also now install `style-loader`. This injects the css into the start of the page.
+
+Another option is to use the `mini-css-extract-plugin` this extracts the css into separate files which we can include. so that the css does not depend on the js being loaded.So, if for some reason javascript does not load, the page will have no styling to it.
+
+Now, modify the config file
+
+```json
+module: {
+  rules: [{
+      test: /\.(scss|sass)$/,
+      use: [
+          "style-loader", // creates style nodes from JS strings
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS, using Node Sass by default
+      ]
+  }]
+}
+```
+
+This will convert any sass/scss to css and inject to the DOM immediately.
+
+---
+
 ## React
 
 ---
