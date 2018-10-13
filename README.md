@@ -130,4 +130,64 @@ We need to install file loader and url loader to bundle images.
 
 - `npm i file-loader url-loader --save-dev`
 
+Then we need to modify the config file
+
+```json
+module.exports = {
+    module: {
+        rules: [
+        {
+            test: /\.(jpg|png|gif)$/,
+            use: ["url-loader" ]
+        }]
+    }
+}
+```
+
+This process loads images from the CSS file
+**To load images from the HTML file, use HTML loader** without this, images will not load. Do not need to install anything further.
+
+```json
+{
+        test: /\.html$/,
+        use: [
+            {
+            loader: "html-loader",
+            options: { minimize: true }
+            }
+        ]
+        }
+```
+
+---
+
+## Webpack Dev Sever
+
+Running `npm run dev` whenever you make changes to your code
+
+First install `npm i webpack-dev-server --save-dev`
+
+Once configured webpack dev server will launch your application inside a browser.It will automagically refresh the browser’s window as well, every time you change a file.
+
+Change the `package.json`
+
+```json
+"scripts": {
+  "start": "webpack-dev-server --mode development --open",
+  "build": "webpack --mode production"
+}
+```
+
+May or maynot configure the serve in config.js
+
+```json
+devServer: {
+    contentBase: 'dist',
+    port: 9000,
+    watchContentBase: true
+}
+```
+
+Run by typing `npm run start` in the console.
+
 ---
