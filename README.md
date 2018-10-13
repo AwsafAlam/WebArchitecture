@@ -295,6 +295,12 @@ Now, create a folder named components, and add react code to index.js. Add other
 
 ---
 
+## Using SVG with React webpack
+
+- `npm install svg-inline-loader --save-dev`
+
+---
+
 ### React Markdown
 
 Converts Markdown into React

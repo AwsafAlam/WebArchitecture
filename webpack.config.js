@@ -36,7 +36,7 @@ module.exports = {
             use: ["style-loader", "css-loader?sourceMap" ] //sourceMap enables devtool
         },
         {
-            test: /\.(jpg|png|gif)$/,
+            test: /\.(jpg|png|gif|svg)$/,
             use: ["url-loader" ]
         }
 
