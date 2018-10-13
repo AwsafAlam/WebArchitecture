@@ -185,6 +185,8 @@ We must install some loader. Loaders are different from plugins. Plugins modify 
 
 For using loaders, we need to use rules in the config.js file. Webpack bundles all of our CSS code into the index.js fileSo, we need to add an import for that at the start of `index.js` specify `import style from "./main.css";`
 
+By default webpack uses hash to extraxt file, but we can specify the names if we want. mini-css-extract-plugin will extract the css from the index,js and put thenm in a seperate folder.
+
 ---
 
 ## Bundling Images (URLs within CSS)
@@ -348,3 +350,128 @@ Now, create a folder named components, and add react code to index.js. Add other
 ### React Markdown
 
 Converts Markdown into React
+
+---
+
+## Working with multiple HTML files
+
+We can simply use a plugin multiple times . e.g
+
+```json
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+module.exports = {
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/users.html",
+      filename: "./users.html"
+      chunks: []
+    })
+
+  ]
+};
+
+```
+
+But this can only be used for specipic no. of files (static websites). Only specific chunks are added. Another option is using file-loader
+
+```js
+{
+  test: /\.html$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]'
+      }
+    }
+  ],
+  exclude: path.resolve(__dirname, './src/index.html)
+}
+```
+
+This way we can add all the html pages. we need to first include `./users.html` inside index.js
+
+---
+
+## Using third party packages such as jquery and bootstrap
+
+using npm we can install all of these. Since Jquery is a production dependency, and not a development dependency, we use `npm install --save jquery`
+
+Now, we need to import it into the js file. otherwise, this will not be used by webpack when compiling. `import 'jquery';` in the index.js. Since it is a package by npm, we do not need to specify any ralative path.
+
+we need to add webpack plugin to the configure.js file
+
+```js
+plugins: [
+  new webpack.ProvidePlugin({
+    // Map variables/ functions/ objects to functions from other packages(JQuery)
+    $: 'jquery',
+    jQuery: 'jquery'
+  })
+]
+```
+
+So, webpack compiles these codes only instead to importing the entire jquery library.
+
+---
+
+### Code Splitting
+
+Code splitting is one of the most compelling features of webpack. This feature allows you to split your code into various bundles which can then be loaded on demand or in parallel. It can be used to achieve smaller bundles and control resource load prioritization which, if used correctly, can have a major impact on load time.
+
+There are three general approaches to code splitting available:
+
+- Entry Points: Manually split code using entry configuration.
+- Prevent Duplication: Use the SplitChunksPlugin to dedupe and split chunks.
+- Dynamic Imports: Split code via inline function calls within modules.
+
+Manually spliting code:
+
+```js
+entry: {
+  index: './src/index.js',
+  another: './src/another-module.js'
+}
+```
+
+As mentioned there are some pitfalls to this approach:
+
+- If there are any duplicated modules between entry chunks they will be included in both bundles.
+- It isn't as flexible and can't be used to dynamically split code with the core application logic.
+
+**To prevent duplication:** The SplitChunksPlugin allows us to extract common dependencies into an existing entry chunk or an entirely new chunk.
+
+```js
+optimization: {
+    splitChunks: {
+      chunks: 'all'
+  }
+}
+```
+
+Here are some other useful plugins and loaders provided by the community for splitting code:
+
+- mini-css-extract-plugin: Useful for splitting CSS out from the main application.
+- bundle-loader: Used to split code and lazy load the resulting bundles.
+- promise-loader: Similar to the bundle-loader but uses promises.
+
+Some of them use async await to optimize code.
+
+Using dynamic imports such as:
+
+```js
+return import(/* webpackChunkName: "lodash" */ 'lodash').then(({ default: _ }) => {
++     var element = document.createElement('div');
++
++     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
++
++     return element;
++
++   }).catch(error => 'An error occurred while loading the component');
+```
+
+webpack does all the optimizations for us.
