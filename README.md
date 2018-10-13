@@ -122,6 +122,12 @@ We must install some loader. Loaders are different from plugins. Plugins modify 
 
 For using loaders, we need to use rules in the config.js file. Webpack bundles all of our CSS code into the index.js fileSo, we need to add an import for that at the start of `index.js` specify `import style from "./main.css";`
 
+---
 
+## Bundling Images (URLs within CSS)
+
+We need to install file loader and url loader to bundle images.
+
+- `npm i file-loader url-loader --save-dev`
 
 ---
