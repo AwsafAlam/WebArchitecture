@@ -291,6 +291,14 @@ module: {
       ]
   }]
 }
+
+// Don't forget to minimize the css
+use: ["style-loader",
+    {
+      loader: "css-loader?sourceMap",
+      options: { minimize: true }
+
+    }]
 ```
 
 This will convert any sass/scss to css and inject to the DOM immediately.

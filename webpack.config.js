@@ -34,7 +34,12 @@ module.exports = {
         },
         {
             test: /\.css$/,
-            use: ["style-loader", "css-loader?sourceMap" ] //sourceMap enables devtool
+            use: ["style-loader", 
+            {
+                loader: "css-loader?sourceMap",
+                options: { minimize: true }
+            
+            }] //sourceMap enables devtool
         },
         {
             test: /\.(jpg|png|gif|svg)$/,
@@ -44,7 +49,11 @@ module.exports = {
             test: /\.(scss|sass)$/,
             use: [
                 "style-loader", // creates style nodes from JS strings
-                "css-loader?sourceMap", // translates CSS into CommonJS
+                {
+                    loader: "css-loader?sourceMap",
+                    options: { minimize: true }
+                
+                }, // translates CSS into CommonJS
                 "sass-loader" // compiles Sass to CSS, using Node Sass by default
             ]
         }
